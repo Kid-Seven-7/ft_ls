@@ -8,7 +8,7 @@ OBJ = test.o
 all:$(NAME)
 
 $(NAME):
-	$(CC) -c $(SRC) $(CFLAGS)
+	$(CC) $(SRC) $(CFLAGS)
 	make -C $(LIBFTPATH)
 
 clean:

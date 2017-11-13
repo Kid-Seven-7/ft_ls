@@ -8,7 +8,7 @@ OBJ = test.o
 all:$(NAME)
 
 $(NAME):
-	$(CC) $(SRC) $(CFLAGS)
+	$(CC) -o $(NAME) $(SRC) $(CFLAGS)
 	make -C $(LIBFTPATH)
 
 clean:
@@ -17,6 +17,8 @@ clean:
 fclean:
 	make -C $(LIBFTPATH) fclean
 	echo "\033[31;1m$(LIBFTPATH) removed!\033[0m"
+	rm -f $(NAME)
+	echo "\033[31;1m$(NAME) removed!\033[0m"
 
 re:
 	make -C $(LIBFTPATH) re

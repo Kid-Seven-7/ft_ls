@@ -2,14 +2,14 @@ LIBFTPATH = ./libft/
 NAME = ft_ls
 CC = clang
 CFLAGS = -Wall -Werror -Wextra
-SRC = test.c
+SRC = test.c libft/libft.a
 OBJ = test.o
 
 all:$(NAME)
 
 $(NAME):
-	$(CC) -o $(NAME) $(SRC) $(CFLAGS)
 	make -C $(LIBFTPATH)
+	$(CC) -o $(NAME) $(SRC) $(CFLAGS)
 
 clean:
 	make -C $(LIBFTPATH) clean
@@ -22,3 +22,4 @@ fclean:
 
 re:
 	make -C $(LIBFTPATH) re
+	$(CC) -o $(NAME) $(SRC) $(CFLAGS)

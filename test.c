@@ -12,6 +12,19 @@
 
 #include "../libft/libft.h"
 
+t_list	*ft_lstadd_to_head(t_list *list, char *str)
+{
+  t_list    *temp;
+
+  temp = malloc(sizeof(t_list));
+  if (temp)
+  {
+    temp->content = str;
+    temp->next = list;
+  }
+  return (temp);
+}
+
 int main(void)
 {
   DIR             	*d;
@@ -28,13 +41,14 @@ int main(void)
   {
     while ((dir = readdir(d)) != NULL)
     {
-		temp->content = dir->d_name;
-		ft_lstadd(&head, temp);
-		ft_putendl(temp->content);
+      head = ft_lstadd_to_head(head, (char *)dir->d_name);
     }
     closedir(d);
-	printf("head cont is %s\n", head->content);
-	printf("temp cont is %s", head->content);
+	  while (head)
+    {
+         printf("head is %s\n", head->content);
+        head = head->next;
+    }
   }
   return (0);
 }

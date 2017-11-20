@@ -1,24 +1,15 @@
-ALLOWED FUNCTIONS
+ft_ls synopsis
 
-write() - fcntl.h
-  A system call used to write data out of a buffer
+main.c
+	-calls read_into_dir
 
-  Function definition
-  ssize_t write(int fildes, const void *buf, size_t nbytes);
-    int fildes
-      The file descriptor of where to write the output. You can either use a file descriptor obtained from the open system call, or you can use 0, 1, or 2, to refer to standard input, standard output, or standard error, respectively.
-    const void *buf
-      A pointer to a buffer of at least nbytes bytes, which will be written to the file.
-    size_t nbytes
-      The number of bytes to write. If smaller than the provided buffer, the output is truncated.
-      return value	Returns the number of bytes that were written. If value is negative, then the system call returned an error.
+read_into_dir.c
+	-calls opendir to open the directory
+	-calls readdir to read the content of the directory
+	-calls lstnew to create a list if the head is NULL
+	-calls ft_lstadd_to_head([list], [content_to_add])
+	-calls closedir to dir the opened directory
+	-calls ft_putendl to print out heads content
 
-
-opendir - dirent.h
-  Opens a directory
-
-  Function definition
-  DIR *opendir(const char *dirname);
-
-  dirname
-    The name of the directory to be opened
+ft_lstadd_to_head.c
+	-calls ft_lstnew to create a node to add to the head of the list

@@ -1,9 +1,14 @@
 LIBFTPATH = ./libft/
-NAME = ft_ls
-CC = clang
-CFLAGS = -Wall -Werror -Wextra
-SRC = test.c libft/libft.a
-OBJ = test.o
+NAME = 		ft_ls
+CC = 		clang
+CFLAGS = 	-Wall -Werror -Wextra
+SRC = 		main.c\
+			readdir.c\
+			ft_lstadd_to_head.c\
+			libft/libft.a
+OBJ =		main.o\
+			ft_lstadd_to_head.o\
+		   	test.o
 
 all:$(NAME)
 

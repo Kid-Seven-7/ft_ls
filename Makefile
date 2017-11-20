@@ -5,9 +5,11 @@ CFLAGS = 	-Wall -Werror -Wextra
 SRC = 		main.c\
 			readdir.c\
 			ft_lstadd_to_head.c\
+			arg_check.c\
 			libft/libft.a
 OBJ =		main.o\
 			ft_lstadd_to_head.o\
+			arg_check.o\
 		   	test.o
 
 all:$(NAME)

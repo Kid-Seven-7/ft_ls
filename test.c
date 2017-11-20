@@ -12,16 +12,36 @@
 
 #include "../libft/libft.h"
 
+void    ft_lstsort(t_list *head)
+{
+  char      *temp;
+  int       flag;
+
+  flag = 1;
+  if (head->next)
+    while (flag != 0)
+    {
+      while(head->next)
+      {
+        if ((char*)head->content[0] > (char*)head->next->content[0])
+        {
+          temp = head->content;
+          head->content = head->next->content;
+          head->next->content = temp;
+        }
+        else
+        head = head->next;
+      }
+    }
+}
+
 t_list	*ft_lstadd_to_head(t_list *list, char *str)
 {
   t_list    *temp;
 
-  temp = malloc(sizeof(t_list));
+  temp = ft_lstnew(str, ft_strlen(str));
   if (temp)
-  {
-    temp->content = str;
     temp->next = list;
-  }
   return (temp);
 }
 
@@ -29,26 +49,38 @@ int main(void)
 {
   DIR             	*d;
   struct dirent   	*dir;
-  t_list			*head;
-  t_list			*temp;
+  t_list      			*head;
+  int               i;
 
   head = NULL;
-  temp = NULL;
-  head = (t_list*)malloc(sizeof(t_list));
-  temp = (t_list*)malloc(sizeof(t_list));
+  dir = NULL;
+  i = 0;
   d = opendir(".");
   if (d)
   {
     while ((dir = readdir(d)) != NULL)
-    {
-      head = ft_lstadd_to_head(head, (char *)dir->d_name);
-    }
+      if (head == NULL)
+        head = ft_lstnew((char *)dir->d_name, ft_strlen((char *)dir->d_name));
+      else
+        head = ft_lstadd_to_head(head, (char *)dir->d_name);
     closedir(d);
-	  while (head)
+    // ft_lstsort(&head);
+	  while (head != NULL)
     {
-         printf("head is %s\n", head->content);
-        head = head->next;
+      i++;
+      ft_putstr(head->content);
+      if (ft_strlen((char *)head->content) > 7)
+        ft_putstr("\t");
+      else
+        ft_putstr("\t\t");
+      if (i % 9 == 0)
+        ft_putstr("\n");
+      head = head->next;
     }
+  }
+  else
+  {
+
   }
   return (0);
 }

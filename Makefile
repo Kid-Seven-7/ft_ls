@@ -16,7 +16,7 @@ all:$(NAME)
 
 $(NAME):
 	make -C $(LIBFTPATH)
-	$(CC) -o $(NAME) $(SRC) $(CFLAGS)
+	$(CC) -o $(NAME) -g $(SRC) $(CFLAGS)
 
 clean:
 	make -C $(LIBFTPATH) clean

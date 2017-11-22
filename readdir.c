@@ -6,16 +6,11 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 11:06:00 by jngoma            #+#    #+#             */
-/*   Updated: 2017/11/21 15:44:16 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/11/22 12:41:13 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <time.h>
-#include <pwd.h>
-#include <grp.h>
 
 void	sub(char * str)
 {
@@ -55,24 +50,6 @@ void	sub(char * str)
 	closedir(d);
 }
 
-t_filedata	*init()
-{
-	t_filedata	*list;
-
-	list = NULL;
-	if (!(list = (t_filedata *)malloc(sizeof(t_filedata))))
-		return (NULL);
-	list->name = NULL;
-	list->timestamp = NULL;
-	list->uid = NULL;
-	list->gid = NULL;
-	list->size = 0;
-	list->links = 0;
-	list->permissions = 0;
-	list->next = NULL;
-	return (list);
-}
-
 void	read_into_dir(void)
 {
 	DIR				*d;
@@ -86,6 +63,7 @@ void	read_into_dir(void)
 
 	d = opendir(".");
 	head = NULL;
+	refined = NULL;
 	refined = init();
 	user = NULL;
 	if (d)
@@ -95,29 +73,28 @@ void	read_into_dir(void)
 			if (head == NULL)
 				head = ft_lstnew((char *)dir->d_name,
 						ft_strlen((char *)dir->d_name));
+				//NEED TO COMPLETE STRUCT TRAN TO USE THIS
+				//refined = new_node(dir);
 			else
 				head = ft_lstadd_to_head(head, (char *)dir->d_name);
 			if (dir->d_type == 4)
 			{
-				//if (ft_strncmp((char *)dir->d_name, ".", 1) != 0)
-				//	sub((char *)dir->d_name);
-				//else
-					//printf("%s\n", dir->d_name);
+				if (ft_strncmp((char *)dir->d_name, ".", 1) != 0)
+					sub((char *)dir->d_name);
+				else
+					printf("%s\n", dir->d_name);
 				{
 				stat(dir->d_name, &foo);
 			printf("file: %s\n",dir->d_name);
 			printf("time access: %s", ctime(&foo.st_atime));
 			printf("time modified: %s", ctime(&foo.st_mtime));
 			printf("time status: %s", ctime(&foo.st_ctime));
-			//printf("uid: %u\n", foo.st_uid);
 			user = getpwuid(foo.st_uid);
 			printf("uid: %s\n",user->pw_name);
-			//printf("gid: %u\n", foo.st_gid);
 			grp = getgrgid(foo.st_gid);
 			printf("uid: %s\n",grp->gr_name);
-			printf("size: %ld\n", foo.st_size);
-			printf("link: %lu\n", foo.st_nlink);
-			//printf("mode: %u\n", foo.st_mode);
+			printf("size: %lld\n", foo.st_size);
+			printf("link: %hu\n", foo.st_nlink);
 			printf((S_ISDIR(foo.st_mode)) ? "d" : "-");
 			printf((foo.st_mode & S_IRUSR) ? "r" : "-");
 			printf((foo.st_mode & S_IWUSR) ? "w" : "-");
@@ -132,22 +109,18 @@ void	read_into_dir(void)
 				}
 			}
 			else
-				//printf("%s\n", dir->d_name);
 			{
 			stat(dir->d_name, &foo);
 			printf("file: %s\n",dir->d_name);
 			printf("time access: %s", ctime(&foo.st_atime));
 			printf("time modified: %s", ctime(&foo.st_mtime));
 			printf("time status: %s", ctime(&foo.st_ctime));
-			//printf("uid: %u\n", foo.st_uid);
 			user = getpwuid(foo.st_uid);
 			printf("uid: %s\n",user->pw_name);
-			//printf("gid: %u\n", foo.st_gid);
 			grp = getgrgid(foo.st_gid);
 			printf("uid: %s\n",grp->gr_name);
-			printf("size: %ld\n", foo.st_size);
-			printf("link: %lu\n", foo.st_nlink);
-			//printf("mode: %u\n", foo.st_mode);
+			printf("size: %lld\n", foo.st_size);
+			printf("link: %hu\n", foo.st_nlink);
 			printf((S_ISDIR(foo.st_mode)) ? "d" : "-");
 			printf((foo.st_mode & S_IRUSR) ? "r" : "-");
 			printf((foo.st_mode & S_IWUSR) ? "w" : "-");
@@ -159,8 +132,6 @@ void	read_into_dir(void)
 			printf((foo.st_mode & S_IWOTH) ? "w" : "-");
 			printf((foo.st_mode & S_IXOTH) ? "x" : "-");
 			printf("\n");
-			//printf("time %ld\n", foo.st_atime);
-			//printf("time %ld\n", foo.st_atime);
 			}
 		}
 

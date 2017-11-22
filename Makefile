@@ -6,11 +6,10 @@ SRC = 		main.c\
 			readdir.c\
 			ft_lstadd_to_head.c\
 			arg_check.c\
+			init_struct.c\
+			new_node.c\
 			libft/libft.a
-OBJ =		main.o\
-			ft_lstadd_to_head.o\
-			arg_check.o\
-		   	test.o
+OBJ =		
 
 all:$(NAME)
 

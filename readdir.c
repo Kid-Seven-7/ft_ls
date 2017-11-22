@@ -55,6 +55,24 @@ void	sub(char * str)
 	closedir(d);
 }
 
+t_filedata	*init()
+{
+	t_filedata	*list;
+
+	list = NULL;
+	if (!(list = (t_filedata *)malloc(sizeof(t_filedata))))
+		return (NULL);
+	list->name = NULL;
+	list->timestamp = NULL;
+	list->uid = NULL;
+	list->gid = NULL;
+	list->size = 0;
+	list->links = 0;
+	list->permissions = 0;
+	list->next = NULL;
+	return (list);
+}
+
 void	read_into_dir(void)
 {
 	DIR				*d;
@@ -62,11 +80,13 @@ void	read_into_dir(void)
 	struct passwd	*user;
 	struct group	*grp;
 	t_list			*head;
+	t_filedata		*refined;
 
 	struct stat		foo;
 
 	d = opendir(".");
 	head = NULL;
+	refined = init();
 	user = NULL;
 	if (d)
 	{

@@ -22,8 +22,20 @@
 //   struct s_file *next;
 // }               t_list;
 
-void		read_into_dir(void);
-int 		arg_check(int ac, char **av);
-t_list	*ft_lstadd_to_head(t_list *list, char *str);
+typedef struct			s_filedata
+{
+	char			*name;
+	char			*timestamp;
+	char			*uid;
+	char			*gid;
+	long int		size;
+	unsigned long int	links;
+	unsigned int		permissions;
+	struct	s_filedata	*next;
+}				t_filedata;
+
+void				read_into_dir(void);
+int 				arg_check(int ac, char **av);
+t_list				*ft_lstadd_to_head(t_list *list, char *str);
 
 #endif

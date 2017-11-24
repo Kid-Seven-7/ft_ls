@@ -1,22 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 11:06:00 by jngoma            #+#    #+#             */
-/*   Updated: 2017/11/22 12:41:13 by jngoma           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ft_ls.h"
 
 void	sub(char * str)
 {
 	DIR				*d;
 	struct dirent	*dir;
-	t_list			*head;
+	t_filedata			*head;
 	char			*joined;
 
 	d = opendir(str);
@@ -27,10 +15,9 @@ void	sub(char * str)
 		while ((dir = readdir(d)) != NULL)
 		{
 			if (head == NULL)
-				head = ft_lstnew((char *)dir->d_name,
-						ft_strlen((char *)dir->d_name));
-			else
-				head = ft_lstadd_to_head(head, (char *)dir->d_name);
+				head = new_node(dir);
+			//else
+				//head = ft_lstadd_to_head(head, (char *)dir->d_name);
 			if (dir->d_type == 4)
 			{
 				if (ft_strncmp((char *)dir->d_name, ".", 1) != 0)
@@ -56,27 +43,21 @@ void	read_into_dir(void)
 	struct dirent	*dir;
 	struct passwd	*user;
 	struct group	*grp;
-	t_list			*head;
-	t_filedata		*refined;
+	t_filedata			*head;
 
 	struct stat		foo;
 
 	d = opendir(".");
 	head = NULL;
-	refined = NULL;
-	refined = init();
 	user = NULL;
 	if (d)
 	{
 		while ((dir = readdir(d)) != NULL)
 		{
 			if (head == NULL)
-				head = ft_lstnew((char *)dir->d_name,
-						ft_strlen((char *)dir->d_name));
-				//NEED TO COMPLETE STRUCT TRAN TO USE THIS
-				//refined = new_node(dir);
-			else
-				head = ft_lstadd_to_head(head, (char *)dir->d_name);
+				head = new_node(dir);
+			//else
+				//head = ft_lstadd_to_head(head, (char *)dir->d_name);
 			if (dir->d_type == 4)
 			{
 				if (ft_strncmp((char *)dir->d_name, ".", 1) != 0)
@@ -134,7 +115,6 @@ void	read_into_dir(void)
 			printf("\n");
 			}
 		}
-
 		closedir(d);
 	}
 }

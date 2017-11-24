@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_to_head.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/22 11:31:35 by jngoma            #+#    #+#             */
-/*   Updated: 2017/11/22 11:41:02 by jngoma           ###   ########.fr       */
+/*   Created: 2017/11/20 12:07:56 by jngoma            #+#    #+#             */
+/*   Updated: 2017/11/22 11:45:26 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_filedata	*init(void)
+t_list	*ft_lstadd_to_head(t_list *list, char *str)
 {
-	t_filedata	*list;
+	t_list	*temp;
 
-	list = NULL;
-	if (!(list = (t_filedata *)malloc(sizeof(t_filedata))))
-		return (NULL);
-	list->name = NULL;
-	list->timestamp = NULL;
-	list->uid = NULL;
-	list->gid = NULL;
-	list->size = 0;
-	list->links = 0;
-	list->permissions = 0;
-	list->sub = NULL;
-	list->next = NULL;
-	return (list);
+	temp = ft_lstnew(str, ft_strlen(str));
+	if (temp)
+		temp->next = list;
+	return (temp);
 }

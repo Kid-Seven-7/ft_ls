@@ -7,8 +7,8 @@ int arg_check(int ac, char **av)
   i = -1;
   while (++i < ac)
   {
-    if (av[i][0] == '-')
-    return (0);
+    if (av[i][0] != '-')
+      return (1);
   }
-  return (1);
+  return (0);
 }

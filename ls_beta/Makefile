@@ -6,6 +6,7 @@ SRC 			= main.c\
 						arg_check.c\
 						readdir.c\
 						new_node.c\
+						ft_lstadd_to_head.c\
 						libft/libft.a
 OBJ =
 

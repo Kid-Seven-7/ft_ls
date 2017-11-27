@@ -12,11 +12,11 @@
 
 #include "ft_ls.h"
 
-t_list	*ft_lstadd_to_head(t_list *list, char *str)
+t_filedata	*ft_lstadd_to_head(struct dirent *dir, t_filedata *list)
 {
-	t_list	*temp;
+	t_filedata	*temp;
 
-	temp = ft_lstnew(str, ft_strlen(str));
+	temp = new_node(dir);
 	if (temp)
 		temp->next = list;
 	return (temp);

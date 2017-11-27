@@ -15,13 +15,13 @@ void        ids(t_filedata **list, struct stat stats)
 
 void        general(t_filedata **list, struct stat stats)
 {
-  (*list)->timestamp = (char *)malloc(ft_strlen(ctime(&stats.st_mtime)));
+  // (*list)->timestamp = (char *)malloc(ft_strlen(ctime(&stats.st_mtime)));
   (*list)->timestamp = ctime(&stats.st_mtime);
-  (*list)->size = (long int)malloc(sizeof(long int));
+  // (*list)->size = (long int)malloc(sizeof(long int));
   (*list)->size = stats.st_size;
-  (*list)->links = (unsigned long int)malloc(sizeof(unsigned long int));
+  // (*list)->links = (unsigned long int)malloc(sizeof(unsigned long int));
   (*list)->links = stats.st_nlink;
-  (*list)->permissions = (unsigned int)malloc(sizeof(unsigned int));
+  // (*list)->permissions = (unsigned int)malloc(sizeof(unsigned int));
   (*list)->permissions = stats.st_mode;
 }
 
@@ -34,9 +34,14 @@ t_filedata	*new_node(struct dirent *dir)
 	list = NULL;
 	if (!(list = (t_filedata *)malloc(sizeof(t_filedata))))
 		return (NULL);
-  list->name = (char *)malloc(ft_strlen((char *)dir->d_name));
+  // list->name = (char *)malloc(ft_strlen((char *)dir->d_name));
 	list->name = dir->d_name;
   general(&list, stats);
 	list->next = NULL;
+  printf("from struct time\n%s\n", list->timestamp);
+  printf("from struct size\n%ld\n", list->size);
+  printf("from struct links\n%lu\n", list->links);
+  printf("from struct permissions\n%u\n", list->permissions);
+  printf("from struct name\n%s\n", list->name);
 	return (list);
 }

@@ -1,23 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   readdir.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/29 09:23:40 by jngoma            #+#    #+#             */
+/*   Updated: 2017/11/29 10:36:18 by jngoma           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
-void	sub(char * str)
+t_filedata			*sub(char *str)
 {
-	DIR				*d;
+	DIR				*sub_d;
 	struct dirent	*dir;
-	t_filedata			*head;
+	t_filedata		*head;
 	char			*joined;
 
-	d = opendir(str);
+	sub_d = opendir(str);
 	head = NULL;
-	if (d)
+	printf("sub function called\n");
+	if (sub_d)
 	{
-		printf("\n./%s:\n", str);
-		while ((dir = readdir(d)) != NULL)
+		printf("\ndir with subs is ./%s:\n", str);
+		while ((dir = readdir(sub_d)) != NULL)
 		{
+			printf("before head init\n");
 			if (head == NULL)
+			{
+				printf("head is null\n");
 				head = new_node(dir);
+			}
 			else
+			{
+				printf("head is not null\n");
 				head = ft_lstadd_to_head(dir, head);
+			}
+			printf("after head init\n");
 			if (dir->d_type == 4)
 			{
 				if (ft_strncmp((char *)dir->d_name, ".", 1) != 0)
@@ -32,87 +53,41 @@ void	sub(char * str)
 			else
 				printf("%s\n", dir->d_name);
 		}
-		printf("\n");
 	}
-	closedir(d);
+	closedir(sub_d);
+	return (head);
 }
 
-void	read_into_dir(void)
+void				read_into_dir(void)
 {
-	DIR						*d;
+	DIR				*d;
 	struct dirent	*dir;
-	struct passwd	*user;
-	struct group	*grp;
 	t_filedata		*head;
-
-	struct stat		foo;
+	int i = 1;
+	int j = 1;
 
 	d = opendir(".");
 	head = NULL;
-	user = NULL;
 	if (d)
 	{
 		while ((dir = readdir(d)) != NULL)
 		{
 			if (head == NULL)
-				head = new_node(dir);
-			else
-				head = ft_lstadd_to_head(dir, head);
-			if (dir->d_type == 4)
 			{
-				if (ft_strncmp((char *)dir->d_name, ".", 1) != 0)
-					sub((char *)dir->d_name);
-				else
-					printf("%s\n", dir->d_name);
-				{
-				stat(dir->d_name, &foo);
-			// printf("file: %s\n",dir->d_name);
-			// printf("time access: %s", ctime(&foo.st_atime));
-			// printf("time modified: %s", ctime(&foo.st_mtime));
-			// printf("time status: %s", ctime(&foo.st_ctime));
-			// user = getpwuid(foo.st_uid);
-			// printf("uid: %s\n",user->pw_name);
-			// grp = getgrgid(foo.st_gid);
-			// printf("uid: %s\n",grp->gr_name);
-			// printf("size: %lld\n", foo.st_size);
-			// printf("link: %hu\n", foo.st_nlink);
-			// printf((S_ISDIR(foo.st_mode)) ? "d" : "-");
-			// printf((foo.st_mode & S_IRUSR) ? "r" : "-");
-			// printf((foo.st_mode & S_IWUSR) ? "w" : "-");
-			// printf((foo.st_mode & S_IXUSR) ? "x" : "-");
-			// printf((foo.st_mode & S_IRGRP) ? "r" : "-");
-			// printf((foo.st_mode & S_IWGRP) ? "w" : "-");
-			// printf((foo.st_mode & S_IXGRP) ? "x" : "-");
-			// printf((foo.st_mode & S_IROTH) ? "r" : "-");
-			// printf((foo.st_mode & S_IWOTH) ? "w" : "-");
-			// printf((foo.st_mode & S_IXOTH) ? "x" : "-");
-			// printf("\n");
-				}
+				printf("calls for a head == %i\n",i);
+				i++;
+				head = new_node(dir);
 			}
 			else
 			{
-			stat(dir->d_name, &foo);
-			// printf("file: %s\n",dir->d_name);
-			// printf("time access: %s", ctime(&foo.st_atime));
-			// printf("time modified: %s", ctime(&foo.st_mtime));
-			// printf("time status: %s", ctime(&foo.st_ctime));
-			// user = getpwuid(foo.st_uid);
-			// printf("uid: %s\n",user->pw_name);
-			// grp = getgrgid(foo.st_gid);
-			// printf("uid: %s\n",grp->gr_name);
-			// printf("size: %lld\n", foo.st_size);
-			// printf("link: %hu\n", foo.st_nlink);
-			// printf((S_ISDIR(foo.st_mode)) ? "d" : "-");
-			// printf((foo.st_mode & S_IRUSR) ? "r" : "-");
-			// printf((foo.st_mode & S_IWUSR) ? "w" : "-");
-			// printf((foo.st_mode & S_IXUSR) ? "x" : "-");
-			// printf((foo.st_mode & S_IRGRP) ? "r" : "-");
-			// printf((foo.st_mode & S_IWGRP) ? "w" : "-");
-			// printf((foo.st_mode & S_IXGRP) ? "x" : "-");
-			// printf((foo.st_mode & S_IROTH) ? "r" : "-");
-			// printf((foo.st_mode & S_IWOTH) ? "w" : "-");
-			// printf((foo.st_mode & S_IXOTH) ? "x" : "-");
-			// printf("\n");
+				printf("calls for a head () == %i\n",j);
+				j++;
+				head = ft_lstadd_to_head(dir, head);
+			}
+			if (dir->d_type == 4)
+			{
+				if (ft_strncmp((char *)dir->d_name, ".", 1) != 0)
+					head->sub = sub((char *)dir->d_name);
 			}
 		}
 		closedir(d);

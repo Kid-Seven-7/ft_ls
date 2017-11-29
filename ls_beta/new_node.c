@@ -53,10 +53,10 @@ t_filedata			*new_node(struct dirent *dir)
 	general(&list, stats);
 	list->sub = NULL;
 	list->next = NULL;
-	printf("from struct time\n%s\n", list->timestamp);
-	printf("from struct size\n%ld\n", list->size);
-	printf("from struct links\n%lu\n", list->links);
-	printf("from struct permissions\n%s\n", list->permissions);
-	printf("from struct name\n%s\n", list->name);
+	printf("\nfrom struct name: %s\n", list->name);
+	printf("from struct time: %s", list->timestamp);
+	printf("from struct size: %ld\n", list->size);
+	printf("from struct links: %lu\n", list->links);
+	printf("from struct permissions: %s\n", list->permissions);
 	return (list);
 }

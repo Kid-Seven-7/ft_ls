@@ -27,18 +27,14 @@ t_filedata			*sub(char *str)
 		printf("\ndir with subs is ./%s:\n", str);
 		while ((dir = readdir(sub_d)) != NULL)
 		{
-			printf("before head init\n");
 			if (head == NULL)
 			{
-				printf("head is null\n");
 				head = new_node(dir);
 			}
 			else
 			{
-				printf("head is not null\n");
 				head = ft_lstadd_to_head(dir, head);
 			}
-			printf("after head init\n");
 			if (dir->d_type == 4)
 			{
 				if (ft_strncmp((char *)dir->d_name, ".", 1) != 0)
@@ -63,8 +59,6 @@ void				read_into_dir(void)
 	DIR				*d;
 	struct dirent	*dir;
 	t_filedata		*head;
-	int i = 1;
-	int j = 1;
 
 	d = opendir(".");
 	head = NULL;
@@ -74,14 +68,10 @@ void				read_into_dir(void)
 		{
 			if (head == NULL)
 			{
-				printf("calls for a head == %i\n",i);
-				i++;
 				head = new_node(dir);
 			}
 			else
 			{
-				printf("calls for a head () == %i\n",j);
-				j++;
 				head = ft_lstadd_to_head(dir, head);
 			}
 			if (dir->d_type == 4)

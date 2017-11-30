@@ -50,13 +50,16 @@ t_filedata			*new_node(struct dirent *dir)
 		return (NULL);
 	list->name = dir->d_name;
 	general(&list, stats);
+	ids(&list, stats);
 	list->permissions[0] = *((dir->d_type == 4) ? "d" : "-");
 	list->sub = NULL;
 	list->next = NULL;
-	printf("\nfrom struct name: %s\n", list->name);
-	printf("from struct time: %s", list->timestamp);
-	printf("from struct size: %ld\n", list->size);
-	printf("from struct links: %lu\n", list->links);
-	printf("from struct permissions: %s\n", list->permissions);
+	//printf("\nfrom struct name: %s\n", list->name);
+	//printf("from struct time: %s", list->timestamp);
+	//printf("from struct size: %ld\n", list->size);
+	//printf("from struct links: %lu\n", list->links);
+	//printf("from struct permissions: %s\n", list->permissions);
+	//printf("from struct gid: %s\n", (*list)->gid);
+	//printf("from struct uid: %s\n", (*list)->uid);
 	return (list);
 }

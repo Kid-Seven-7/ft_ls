@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 09:23:40 by jngoma            #+#    #+#             */
-/*   Updated: 2017/11/29 10:36:18 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/11/30 13:32:57 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,14 @@ t_filedata			*sub(char *str)
 
 	sub_d = opendir(str);
 	head = NULL;
-	printf("sub function called\n");
 	if (sub_d)
 	{
-		printf("\ndir with subs is ./%s:\n", str);
 		while ((dir = readdir(sub_d)) != NULL)
 		{
 			if (head == NULL)
-			{
 				head = new_node(dir);
-			}
 			else
-			{
 				head = ft_lstadd_to_head(dir, head);
-			}
 			if (dir->d_type == 4)
 			{
 				if (ft_strncmp((char *)dir->d_name, ".", 1) != 0)
@@ -43,11 +37,7 @@ t_filedata			*sub(char *str)
 					joined = ft_strjoin(joined, (char*)dir->d_name);
 					sub(joined);
 				}
-				else
-					printf("%s\n", dir->d_name);
 			}
-			else
-				printf("%s\n", dir->d_name);
 		}
 	}
 	closedir(sub_d);
@@ -67,13 +57,9 @@ void				read_into_dir(void)
 		while ((dir = readdir(d)) != NULL)
 		{
 			if (head == NULL)
-			{
 				head = new_node(dir);
-			}
 			else
-			{
 				head = ft_lstadd_to_head(dir, head);
-			}
 			if (dir->d_type == 4)
 			{
 				if (ft_strncmp((char *)dir->d_name, ".", 1) != 0)
@@ -82,4 +68,6 @@ void				read_into_dir(void)
 		}
 		closedir(d);
 	}
+	sort_by_name(&head);
+	detailed(head);
 }

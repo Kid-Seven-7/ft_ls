@@ -23,9 +23,11 @@ typedef struct      s_filedata
 
 int					arg_check(int ac, char **av);
 void				read_into_dir(void);
-t_filedata			*ft_lstsub_to_head(struct dirent *dir, t_filedata *list);
-t_filedata			*ft_lstadd_to_head(struct dirent *dir, t_filedata *list);
+void				detailed(t_filedata *list);
+void				sort_by_name(t_filedata **cur);
 t_filedata			*sub(char * str);
 t_filedata			*new_node(struct dirent *dir);
+t_filedata			*ft_lstsub_to_head(struct dirent *dir, t_filedata *list);
+t_filedata			*ft_lstadd_to_head(struct dirent *dir, t_filedata *list);
 
 #endif

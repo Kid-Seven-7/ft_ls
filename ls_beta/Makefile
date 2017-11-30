@@ -7,6 +7,8 @@ SRC 			= main.c\
 						readdir.c\
 						new_node.c\
 						ft_lstadd_to_head.c\
+						print_lst.c\
+						sort_lst.c\
 						libft/libft.a
 OBJ =
 

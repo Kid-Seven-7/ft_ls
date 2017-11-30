@@ -19,7 +19,6 @@ char				*convert_permissions(struct stat stats)
 
 	permissions = (char *)malloc(11);
 	permissions[10] = '\0';
-	permissions[0] = *((stats.st_mode) ? "d" : "-");
 	permissions[1] = *((stats.st_mode & S_IRUSR) ? "r" : "-");
 	permissions[2] = *((stats.st_mode & S_IWUSR) ? "w" : "-");
 	permissions[3] = *((stats.st_mode & S_IXUSR) ? "x" : "-");
@@ -51,6 +50,7 @@ t_filedata			*new_node(struct dirent *dir)
 		return (NULL);
 	list->name = dir->d_name;
 	general(&list, stats);
+	list->permissions[0] = *((dir->d_type == 4) ? "d" : "-");
 	list->sub = NULL;
 	list->next = NULL;
 	printf("\nfrom struct name: %s\n", list->name);

@@ -8,6 +8,13 @@
 # include <pwd.h>
 # include <grp.h>
 
+typedef struct      s_ls
+{
+  char              *params;
+  char              *file;
+  struct s_filedata *data;
+}                   t_ls;
+
 typedef struct      s_filedata
 {
   char              *name;
@@ -21,7 +28,7 @@ typedef struct      s_filedata
   struct s_filedata *next;
 }                   t_filedata;
 
-int					arg_check(int ac, char **av);
+void					arg_check(int ac, char **av);
 void				read_into_dir(void);
 void				detailed(t_filedata *list);
 void				sort_by_name(t_filedata **cur);

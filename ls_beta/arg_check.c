@@ -12,39 +12,32 @@
 
 #include "ft_ls.h"
 
-int		arg_check(int ac, char **av)
+void		arg_check(int ac, char **av)
 {
-	int	i;
-	int	j;
-	int	flag;
-	t_filedata	*list;
-
-	i = 0;
-	j = -1;
-	flag = 1;
-	while (++i < ac)
+	if (ac > 1)
 	{
-		printf("DEBUGGING\nav[%i] is %s\n\n",i, av[i]);
-		if (av[i][0] == '-')
+		int			i;
+		int			j;
+		int			k;
+		t_ls		*data;
+
+		i = -1;
+		k = -1;
+		data = NULL;
+		data->params = (char *)malloc(5);
+		while (++i < ac)
 		{
-			while (av[i][++j] != '\0')
+			j = -1;
+			if (av[i][++j] == '-')
 			{
-				if (av[i][j] != 'R' || av[i][j] != 'l' || av[i][j] != 'a') /*av[i][j] != '')av[i][j] != ''*/
-					flag = 0;
-				else
-					flag = 1;
+				while (av[i][j] != '\0')
+					data->params[++k] = av[i][j];
+			}
+			else
+			{
+				data->file = (char *)malloc(ft_strlen(av[i]));
+				data->file = av[i];
 			}
 		}
-		else
-		list = sub(av[i]);
-		if (list)
-		{
-			detailed(list);
-			flag = 0;
-		}
-		else
-			flag = 1;
-
 	}
-	return (flag == 1) ? 0 : 1;
 }

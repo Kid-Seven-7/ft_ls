@@ -29,7 +29,7 @@ typedef struct      s_filedata
 }                   t_filedata;
 
 void					arg_check(int ac, char **av);
-void				read_into_dir(void);
+void				read_into_dir(char *file);
 void				detailed(t_filedata *list);
 void				sort_by_name(t_filedata **cur);
 t_filedata			*sub(char * str);

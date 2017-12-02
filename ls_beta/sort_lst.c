@@ -14,27 +14,25 @@
 
 void	sort_by_name(t_filedata **cur)
 {
-	int		flag;
-	t_filedata	*next;
-	t_filedata	*prev;
+	t_filedata *prev;
+	t_filedata *next;
+	t_filedata *temp;
 
-	flag = 1;
-	while (flag < 0)
+	temp = NULL;
+	next = NULL;
+	prev = NULL;
+	printf("\n");
+	while ((*cur))
 	{
-		while (cur)
+		if (prev && ((*cur)->next))
 		{
-			next = (*cur)->next;
-			if ((*cur)->next->name[0] > (*cur)->name[0])
-			{
-				(*cur)->next = next->next;
-				prev->next = next;
-				next->next = *cur;
-				flag++;
-			}
-			prev = *cur;
-			cur = &next;
-			if (flag == 1)
-				flag = 0;
+			printf("prev is %s\n", prev->name);
+			printf("cur is %s\n", (*cur)->name);
+			printf("cur next is %s\n", (*cur)->next->name);
+			if(ft_strcmp(((*cur)->name), (*cur)->next->name) > 0)
+				printf("change\n");
 		}
+		prev = (*cur);
+		(*cur) = (*cur)->next;
 	}
 }

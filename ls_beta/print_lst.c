@@ -14,14 +14,14 @@
 
 void		detailed(t_filedata *list)
 {
-	while (list->next)
+	while (list)
 	{
 		//if (ft_strcmp(list->name, ".") || ft_strcmp(list->name, "..")
 			//list = list->next;
-		if (list->name[0] != '.')
-		{
-			ft_putstr(list->permissions);
-			ft_putstr("\t");
+		//if (list->name[0] != '.')
+		//{
+			//ft_putstr(list->permissions);
+			//ft_putstr("\t");
 			//ft_putnbr(list->links);
 			//ft_putstr(" ");
 			//ft_putstr(list->uid);
@@ -34,7 +34,11 @@ void		detailed(t_filedata *list)
 			//ft_putstr(" ");
 			ft_putstr(list->name);
 			ft_putstr("\n");
-		}
+			// if (list->next)
+			// {
+			// 	printf("next is |%s|\n", list->next->name);
+			// }
+		//}
 		list = list->next;
 	}
 }

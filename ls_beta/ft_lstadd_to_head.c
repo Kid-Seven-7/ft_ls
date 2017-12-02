@@ -16,10 +16,21 @@ t_filedata	*ft_lstadd_to_head(struct dirent *dir, t_filedata *list)
 {
 	t_filedata	*temp;
 
-	temp = new_node(dir);
+	temp = list;
+	while(temp->next)
+	{
+		temp = temp->next;
+	}
 	if (temp)
-		temp->next = list;
+	{
+		temp->next = new_node(dir);
+	}
 	return (temp);
+	//
+	// temp = new_node(dir);
+	// if (temp)
+	// 	temp->next = list;
+	// return (temp);
 }
 
 t_filedata	*ft_lstsub_to_head(struct dirent *dir, t_filedata *list)

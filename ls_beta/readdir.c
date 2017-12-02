@@ -44,30 +44,36 @@ t_filedata			*sub(char *str)
 	return (head);
 }
 
-void				read_into_dir(void)
+void				read_into_dir(char *file)
 {
 	DIR				*d;
 	struct dirent	*dir;
 	t_filedata		*head;
 
-	d = opendir(".");
+	d = opendir(file);
 	head = NULL;
 	if (d)
 	{
 		while ((dir = readdir(d)) != NULL)
 		{
-			if (head == NULL)
+			//ft_putendl(dir->d_name);
+
+			if (head == NULL){
 				head = new_node(dir);
+			}
 			else
-				head = ft_lstadd_to_head(dir, head);
+			{
+				ft_lstadd_to_head(dir, head);
+			}
 			if (dir->d_type == 4)
 			{
-				if (ft_strncmp((char *)dir->d_name, ".", 1) != 0)
+				if (!(ft_strnequ((char *)dir->d_name, "..", 2)))
 					head->sub = sub((char *)dir->d_name);
 			}
 		}
 		closedir(d);
 	}
+	detailed(head);
 	sort_by_name(&head);
 	detailed(head);
 }

@@ -44,22 +44,19 @@ t_filedata			*new_node(struct dirent *dir)
 	t_filedata		*list;
 	struct stat 	stats;
 
-	stat(dir->d_name, &stats);
 	list = NULL;
-	if (!(list = (t_filedata *)malloc(sizeof(t_filedata))))
-		return (NULL);
-	list->name = dir->d_name;
-	general(&list, stats);
-	ids(&list, stats);
-	list->permissions[0] = *((dir->d_type == 4) ? "d" : "-");
-	list->sub = NULL;
-	list->next = NULL;
-	//printf("\nfrom struct name: %s\n", list->name);
-	//printf("from struct time: %s", list->timestamp);
-	//printf("from struct size: %ld\n", list->size);
-	//printf("from struct links: %lu\n", list->links);
-	//printf("from struct permissions: %s\n", list->permissions);
-	//printf("from struct gid: %s\n", (*list)->gid);
-	//printf("from struct uid: %s\n", (*list)->uid);
+	if (stat(dir->d_name, &stats) == 0)
+	{
+		//list = NULL;
+		if (!(list = (t_filedata *)malloc(sizeof(t_filedata))))
+			return (NULL);
+		ft_bzero(list, sizeof(t_filedata));
+		list->name = (dir)->d_name;
+		general(&list, stats);
+		ids(&list, stats);
+		list->permissions[0] = *((dir->d_type == 4) ? "d" : "-");
+		list->sub = NULL;
+		list->next = NULL;
+	}
 	return (list);
 }

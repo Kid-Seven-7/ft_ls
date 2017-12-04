@@ -28,7 +28,7 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c \
 	  ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c \
 	  ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_isgraph.c\
 	  ft_lstmap.c ft_isspace.c ft_ispunct.c ft_strshrink.c\
-	  ft_strdesplit.c ft_strdefix.c ft_realloc.c
+	  ft_strdesplit.c ft_strdefix.c
 
 SRCO = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o \
 	  ft_memmove.o ft_memchr.o ft_memcmp.o ft_strlen.o \
@@ -46,7 +46,7 @@ SRCO = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o \
 	  ft_putnbr_fd.o ft_lstnew.o ft_lstdelone.o \
 	  ft_lstdel.o ft_lstadd.o ft_lstiter.o ft_isgraph.o\
 	  ft_lstmap.o ft_isspace.o ft_ispunct.o ft_strshrink.o\
-	  ft_strdesplit.o ft_strdefix.o ft_realloc.o
+	  ft_strdesplit.o ft_strdefix.o
 
 CFLAGS = -Wall -Wextra -Werror
 

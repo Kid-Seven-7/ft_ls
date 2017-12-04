@@ -1,15 +1,17 @@
 LIBFTPATH = ./libft/
-NAME = 		ft_ls
-CC = 		clang
-CFLAGS = 	-Wall -Werror -Wextra
-SRC = 		main.c\
-			readdir.c\
-			ft_lstadd_to_head.c\
-			arg_check.c\
-			init_struct.c\
-			new_node.c\
-			libft/libft.a
-OBJ =		
+NAME 			= ft_ls
+CC 				= clang
+CFLAGS 		= -Wall -Werror -Wextra
+SRC 			= main.c\
+						arg_check.c\
+						readdir.c\
+						new_node.c\
+						ft_lstadd_to_head.c\
+						print_lst.c\
+						sort_lst.c\
+						swap_fields.c\
+						libft/libft.a
+OBJ =
 
 all:$(NAME)
 

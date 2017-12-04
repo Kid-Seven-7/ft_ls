@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/20 11:59:20 by jngoma            #+#    #+#             */
-/*   Updated: 2017/11/22 11:59:26 by jngoma           ###   ########.fr       */
+/*   Created: 2017/12/04 15:30:34 by jngoma            #+#    #+#             */
+/*   Updated: 2017/12/04 15:31:57 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,35 @@
 # include <pwd.h>
 # include <grp.h>
 
-typedef struct			s_filedata
+typedef struct		s_ls
+{
+	char				*params;
+	char				*file;
+	struct s_filedata	*data;
+}					t_ls;
+
+typedef struct		s_filedata
 {
 	char				*name;
 	char				*timestamp;
 	char				*uid;
 	char				*gid;
 	long int			size;
+	long int			block;
 	unsigned long int	links;
-	unsigned int		permissions;
-	struct	s_filedata	*sub;
-	struct	s_filedata	*next;
-}						t_filedata;
+	char				*permissions;
+	struct s_filedata	*sub;
+	struct s_filedata	*next;
+}					t_fdata;
 
-t_filedata			*init(void);
-t_filedata			*new_node(struct dirent *dir);
-void				read_into_dir(void);
-int 				arg_check(int ac, char **av);
-t_list				*ft_lstadd_to_head(t_list *list, char *str);
+void				arg_check(int ac, char **av);
+void				read_into_dir(char *file);
+void				detailed(t_fdata *list);
+void				sort_by_name(t_fdata **cur);
+void				swap_fileds(t_fdata **small, t_fdata **big, t_fdata **prev);
+t_fdata				*sub(char *str);
+t_fdata				*new_node(struct dirent *dir);
+t_fdata				*ft_lstsub_to_head(struct dirent *dir, t_fdata *list);
+t_fdata				*ft_lstadd_to_head(struct dirent *dir, t_fdata *list);
 
 #endif

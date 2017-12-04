@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 10:19:53 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/04 15:27:16 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/04 15:46:33 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		total_blocks(t_fdata *list)
 
 void		detailed(t_fdata *list)
 {
+	total_blocks(list);
 	while (list)
 	{
 		if (list->name[0] != '.')

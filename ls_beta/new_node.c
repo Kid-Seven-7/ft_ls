@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   new_node.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/04 15:32:55 by jngoma            #+#    #+#             */
+/*   Updated: 2017/12/04 15:35:04 by jngoma           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
-void        		ids(t_filedata **list, struct stat stats)
+void				ids(t_fdata **list, struct stat stats)
 {
 	struct passwd	*user;
 	struct group	*grp;
@@ -31,26 +43,27 @@ char				*convert_permissions(struct stat stats)
 	return (permissions);
 }
 
-void        		general(t_filedata **list, struct stat stats)
+void				general(t_fdata **list, struct stat stats)
 {
 	(*list)->timestamp = ctime(&stats.st_mtime);
+	(*list)->timestamp[24] = '\0';
 	(*list)->size = stats.st_size;
+	(*list)->block = stats.st_blocks;
 	(*list)->links = stats.st_nlink;
 	(*list)->permissions = convert_permissions(stats);
 }
 
-t_filedata			*new_node(struct dirent *dir)
+t_fdata				*new_node(struct dirent *dir)
 {
-	t_filedata		*list;
-	struct stat 	stats;
+	t_fdata			*list;
+	struct stat		stats;
 
 	list = NULL;
 	if (stat(dir->d_name, &stats) == 0)
 	{
-		//list = NULL;
-		if (!(list = (t_filedata *)malloc(sizeof(t_filedata))))
+		if (!(list = (t_fdata *)malloc(sizeof(t_fdata))))
 			return (NULL);
-		ft_bzero(list, sizeof(t_filedata));
+		ft_bzero(list, sizeof(t_fdata));
 		list->name = (dir)->d_name;
 		general(&list, stats);
 		ids(&list, stats);

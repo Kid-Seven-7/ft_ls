@@ -9,6 +9,7 @@ SRC 			= main.c\
 						ft_lstadd_to_head.c\
 						print_lst.c\
 						sort_lst.c\
+						swap_fields.c\
 						libft/libft.a
 OBJ =
 

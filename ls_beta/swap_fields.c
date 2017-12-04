@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   swap_fields.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 09:54:41 by jngoma            #+#    #+#             */
-/*   Updated: 2017/11/13 09:58:09 by jngoma           ###   ########.fr       */
+/*   Created: 2017/12/04 15:27:33 by jngoma            #+#    #+#             */
+/*   Updated: 2017/12/04 15:28:06 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_ls.h"
 
-char	**ft_realloc(char **grid, int len)
+void	swap_fileds(t_fdata **small, t_fdata **big, t_fdata **prev)
 {
-	//TODO everything (FML!!!)
-	(void)len;
-	return (grid);
+	t_fdata	*temp;
+	t_fdata	*big_ptr;
+
+	big_ptr = NULL;
+	big_ptr = (*big)->next;
+	temp = (*small);
+	(*small) = (*big);
+	(*big) = temp;
+	(*small)->next = (*big);
+	(*big)->next = big_ptr;
+	if ((*prev) != NULL)
+		(*prev)->next = (*small);
 }

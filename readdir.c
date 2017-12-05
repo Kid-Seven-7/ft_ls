@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 09:23:40 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/04 15:21:16 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/05 10:36:49 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ t_fdata				*sub(char *str)
 	return (head);
 }
 
-void				read_into_dir(char *file)
+t_fdata				*read_into_dir(t_dir *data)
 {
 	DIR				*d;
 	struct dirent	*dir;
 	t_fdata			*head;
 
-	d = opendir(file);
+	d = opendir(data->name);
 	head = NULL;
 	if (d)
 	{
@@ -64,6 +64,5 @@ void				read_into_dir(char *file)
 		}
 		closedir(d);
 	}
-	sort_by_name(&head);
-	detailed(head);
+	return (head);
 }

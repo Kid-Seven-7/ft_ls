@@ -18,9 +18,15 @@ t_fdata	*ft_lstadd_to_head(struct dirent *dir, t_fdata *list)
 
 	temp = list;
 	while (temp->next)
+	{
 		temp = temp->next;
+	}
 	if (temp)
+	{
+		// printf("\nin ft_lstadd_to_head dir name is %s\n", dir->d_name);
 		temp->next = new_node(dir);
+		// printf("\nin ft_lstadd_to_head temp->next name is %s\n", temp->next->name);
+}
 	return (temp);
 }
 

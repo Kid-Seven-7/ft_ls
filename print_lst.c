@@ -12,45 +12,29 @@
 
 #include "ft_ls.h"
 
-void		total_blocks(t_fdata *list)
+void    print_lst(t_fdata *list, t_dir *data)
 {
-	int		total;
+  int   i;
 
-	total = 0;
-	while (list)
-	{
-		total += list->block;
-		list = list->next;
-	}
-	ft_putstr("total ");
-	ft_putnbr(total);
-	ft_putstr("\n");
-}
-
-void		detailed(t_fdata *list)
-{
-	total_blocks(list);
-	while (list)
-	{
-		if (list->name[0] != '.')
-		{
-			ft_putstr(list->permissions);
-			ft_putstr("\t");
-			ft_putnbr(list->links);
-			ft_putstr(" ");
-			ft_putstr(list->uid);
-			ft_putstr(" ");
-			ft_putstr(list->gid);
-			ft_putstr("\t");
-			ft_putnbr(list->size);
-			ft_putstr("\t");
-			ft_putstr(list->timestamp);
-			ft_putstr(" ");
-			ft_putstr(list->name);
-			ft_putstr("\n");
-			list = list->next;
-		}
-		else
-			list = list->next;
-	}
+  i = -1;
+  (void)list;
+  if (data->params)
+  {
+    while (data->params[++i] != '\0')
+    {
+      if (data->params[i])
+      {
+        if (data->params[i] == 'R')
+          printf("param is R\n");
+        if (data->params[i] == 'l')
+          printf("param is l\n");
+        if (data->params[i] == 't')
+          printf("param is t\n");
+        if (data->params[i] == 'a')
+          printf("param is a\n");
+        if (data->params[i] == 'r')
+          printf("param is r\n");
+      }
+    }
+  }
 }

@@ -10,6 +10,7 @@ SRC 			= main.c\
 						print_lst.c\
 						sort_lst.c\
 						swap_fields.c\
+						printing.c\
 						libft/libft.a
 OBJ =
 

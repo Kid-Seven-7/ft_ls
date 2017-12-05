@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 15:32:55 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/04 15:35:04 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/05 10:18:19 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ t_fdata				*new_node(struct dirent *dir)
 		if (!(list = (t_fdata *)malloc(sizeof(t_fdata))))
 			return (NULL);
 		ft_bzero(list, sizeof(t_fdata));
+		// printf("\nin new_node dir name is %s\n", dir->d_name);
 		list->name = (dir)->d_name;
+		// printf("\nin new_node temp->next name is %s\n", list->name);
 		general(&list, stats);
 		ids(&list, stats);
 		list->permissions[0] = *((dir->d_type == 4) ? "d" : "-");

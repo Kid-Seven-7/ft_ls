@@ -6,40 +6,40 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 09:44:47 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/04 15:15:46 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/05 10:41:18 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		file_check(int ac, char **av, int i)
+void		file_check(int ac, char **av, int i, t_dir **data)
 {
 	char *joined;
+	t_dir	*temp;
 
+	temp = (*data);
 	while (i < ac)
 	{
 		joined = ft_strjoin("./", av[i]);
-		printf("joined is %s\n", joined);
-		read_into_dir(joined);
+		temp->name = joined;
 		i++;
+		temp = temp->next;
 	}
 }
 
-void		init_data(t_ls **data)
+void		init_data(t_dir **data)
 {
-	(*data) = (t_ls *)malloc(sizeof(t_ls));
+	(*data) = (t_dir *)malloc(sizeof(t_dir));
 	(*data)->params = (char *)malloc(sizeof(char) * 5);
-	(*data)->params[5] = '\0';
+	ft_bzero((*data)->params, 5);
 }
 
-void		param_check(int ac, char **av)
+void		param_check(int ac, char **av, t_dir **data)
 {
-	t_ls	*data;
 	int		i;
 	int		j;
 	int		k;
 
-	init_data(&data);
 	i = 0;
 	k = -1;
 	while (++i < ac)
@@ -47,16 +47,24 @@ void		param_check(int ac, char **av)
 		j = 0;
 		if (av[i][j] == '-')
 			while (av[i][++j] != '\0')
-				data->params[++k] = av[i][j];
+				(*data)->params[++k] = av[i][j];
 		else
-			file_check(ac, av, i);
+			file_check(ac, av, i, data);
 	}
 }
 
 void		arg_check(int ac, char **av)
 {
+	t_dir	*data;
+	t_fdata	*list;
+
+	list = NULL;
+	init_data(&data);
 	if (ac > 1)
-		param_check(ac, av);
+		param_check(ac, av, &data);
 	else
-		read_into_dir(".");
+		data->name = ".";
+	list = read_into_dir(data);
+	// detailed(list);
+	print_lst(list, data);
 }

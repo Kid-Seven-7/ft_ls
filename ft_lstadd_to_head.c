@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 12:07:56 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/04 15:32:46 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/06 16:03:41 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ t_fdata	*ft_lstadd_to_head(struct dirent *dir, t_fdata *list)
 	}
 	if (temp)
 	{
-		// printf("\nin ft_lstadd_to_head dir name is %s\n", dir->d_name);
 		temp->next = new_node(dir);
-		// printf("\nin ft_lstadd_to_head temp->next name is %s\n", temp->next->name);
-}
+	}
 	return (temp);
 }
 

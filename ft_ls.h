@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 15:30:34 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/05 10:33:19 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/06 16:01:10 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,43 @@
 
 typedef	struct		s_dir
 {
-	char				*params;
-	char				*name;
-	struct s_dir		*next;
+	char					*params;
+	char					*name;
+	struct s_dir			*next;
 }					t_dir;
 
 typedef struct		s_ls
 {
-	char				*params;
-	char				*file;
+	char					*params;
+	char					*file;
 }					t_ls;
 
 typedef struct		s_fdata
 {
-	char				*name;
-	char				*timestamp;
-	char				*uid;
-	char				*gid;
-	long int			size;
-	long int			block;
-	unsigned long int	links;
-	char				*permissions;
-	struct s_fdata		*sub;
-	struct s_fdata		*next;
+	char					*name;
+	char					*timestamp;
+	long					time;
+	char					*uid;
+	char					*gid;
+	long int				size;
+	long int				block;
+	unsigned long int		links;
+	char					*permissions;
+	struct s_fdata			*sub;
+	struct s_fdata			*next;
 }					t_fdata;
 
-void				arg_check(int ac, char **av);
 void				detailed(t_fdata *list);
 void				sort_by_name(t_fdata **cur);
-void    print_lst(t_fdata *list, t_dir *data);
+void				sort_by_time(t_fdata **cur);
+void				arg_check(int ac, char **av);
+void				default_print(t_fdata *list);
+void				print_hidden(t_fdata *list);
+void				print_dhidden(t_fdata *list);
+void				add_to_params(char *params, char param);
+void				sort_by_name_rev(t_fdata **list);
+void				sort_lst(t_fdata *list, t_dir *data);
+void				print_lst(t_fdata *list, t_dir *data);
 void				swap_fileds(t_fdata **small, t_fdata **big, t_fdata **prev);
 t_fdata				*sub(char *str);
 t_fdata				*read_into_dir(t_dir *data);

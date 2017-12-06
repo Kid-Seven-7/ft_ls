@@ -15,6 +15,57 @@ void		total_blocks(t_fdata *list)
 	ft_putstr("\n");
 }
 
+void 		print_hidden(t_fdata *list)
+{
+	while (list)
+	{
+			ft_putstr(list->name);
+			ft_putstr("\t");
+			list = list->next;
+	}
+	ft_putstr("\n");
+}
+
+void 		print_dhidden(t_fdata *list)
+{
+	total_blocks(list);
+	while (list)
+	{
+		ft_putstr(list->permissions);
+		ft_putstr("\t");
+		ft_putnbr(list->links);
+		ft_putstr(" ");
+		ft_putstr(list->uid);
+		ft_putstr(" ");
+		ft_putstr(list->gid);
+		ft_putstr("\t");
+		ft_putnbr(list->size);
+		ft_putstr("\t");
+		ft_putstr(list->timestamp);
+		ft_putstr(" ");
+		ft_putstr(list->name);
+		ft_putstr("\n");
+		list = list->next;
+	}
+	ft_putstr("\n");
+}
+
+void 		default_print(t_fdata *list)
+{
+	while (list)
+	{
+		if (list->name[0] != '.')
+		{
+			ft_putstr(list->name);
+			ft_putstr("\t");
+			list = list->next;
+		}
+		else
+			list = list->next;
+	}
+	ft_putstr("\n");
+}
+
 void		detailed(t_fdata *list)
 {
 	total_blocks(list);

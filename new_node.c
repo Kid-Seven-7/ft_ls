@@ -46,6 +46,7 @@ char				*convert_permissions(struct stat stats)
 void				general(t_fdata **list, struct stat stats)
 {
 	(*list)->timestamp = ctime(&stats.st_mtime);
+	(*list)->time = stats.st_mtime;
 	(*list)->timestamp[24] = '\0';
 	(*list)->size = stats.st_size;
 	(*list)->block = stats.st_blocks;
@@ -64,9 +65,7 @@ t_fdata				*new_node(struct dirent *dir)
 		if (!(list = (t_fdata *)malloc(sizeof(t_fdata))))
 			return (NULL);
 		ft_bzero(list, sizeof(t_fdata));
-		// printf("\nin new_node dir name is %s\n", dir->d_name);
 		list->name = (dir)->d_name;
-		// printf("\nin new_node temp->next name is %s\n", list->name);
 		general(&list, stats);
 		ids(&list, stats);
 		list->permissions[0] = *((dir->d_type == 4) ? "d" : "-");

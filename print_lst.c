@@ -6,35 +6,58 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 10:19:53 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/04 15:46:33 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/06 16:07:30 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void    print_lst(t_fdata *list, t_dir *data)
+void	print_lst(t_fdata *list, t_dir *data)
 {
-  int   i;
+	int		i;
+	int		flag;
 
-  i = -1;
-  (void)list;
-  if (data->params)
-  {
-    while (data->params[++i] != '\0')
-    {
-      if (data->params[i])
-      {
-        if (data->params[i] == 'R')
-          printf("param is R\n");
-        if (data->params[i] == 'l')
-          printf("param is l\n");
-        if (data->params[i] == 't')
-          printf("param is t\n");
-        if (data->params[i] == 'a')
-          printf("param is a\n");
-        if (data->params[i] == 'r')
-          printf("param is r\n");
-      }
-    }
-  }
+	i = -1;
+	flag = 0;
+	if (data->params)
+		while (data->params[++i] != '\0')
+		{
+			if (data->params[i])
+			{
+				if (data->params[i] == 'R')
+					printf("param is R\n");
+				if (data->params[i] == 'l')
+					detailed(list);
+				if (data->params[i] == 'a')
+					print_hidden(list);
+				if (data->params[i] == 'a' && data->params[i + 1] == 'l')
+					print_dhidden(list);
+				flag++;
+			}
+		}
+	if (flag == 0)
+		default_print(list);
+}
+
+void	sort_lst(t_fdata *list, t_dir *data)
+{
+	int		i;
+
+	i = -1;
+	if (data->params)
+	{
+		while (data->params[++i] != '\0')
+		{
+			if (data->params[i] != '\0')
+			{
+				if (data->params[i] == 't')
+					sort_by_time(&list);
+				if (data->params[i] == 'r')
+					sort_by_name_rev(&list);
+			}
+		}
+		if (i == 0)
+			sort_by_name(&list);
+	}
+	print_lst(list, data);
 }

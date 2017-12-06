@@ -1,7 +1,7 @@
 LIBFTPATH = ./libft/
 NAME 			= ft_ls
 CC 				= clang
-CFLAGS 		= -Wall -Werror -Wextra
+CFLAGS 		= #-Wall -Werror -Wextra
 SRC 			= main.c\
 						arg_check.c\
 						readdir.c\

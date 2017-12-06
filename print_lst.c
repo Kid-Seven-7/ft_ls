@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 10:19:53 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/06 16:07:30 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/06 16:10:32 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,25 @@ void	print_lst(t_fdata *list, t_dir *data)
 			if (data->params[i])
 			{
 				if (data->params[i] == 'R')
+				{
 					printf("param is R\n");
+					flag++;
+				}
 				if (data->params[i] == 'l')
+				{
 					detailed(list);
+					flag++;
+				}
 				if (data->params[i] == 'a')
+				{
 					print_hidden(list);
+					flag++;
+				}
 				if (data->params[i] == 'a' && data->params[i + 1] == 'l')
+				{
 					print_dhidden(list);
-				flag++;
+					flag++;
+				}
 			}
 		}
 	if (flag == 0)

@@ -12,6 +12,22 @@
 
 #include "ft_ls.h"
 
+char				*my_time(struct stat stats)
+{
+	char	*my_time;
+	int 	i;
+	char	*temp;
+
+	i = -1;
+	my_time = (char *)malloc(12);
+	my_time[12] = '\0';
+	temp = ctime(&stats.st_mtime);
+	temp[16] = '\0';
+	while (temp[++i + 4] != '\0')
+		my_time[i] = temp[i + 4];
+	return (my_time);
+}
+
 void				ids(t_fdata **list, struct stat stats)
 {
 	struct passwd	*user;
@@ -29,8 +45,8 @@ char				*convert_permissions(struct stat stats)
 {
 	char			*permissions;
 
-	permissions = (char *)malloc(11);
-	permissions[10] = '\0';
+	permissions = (char *)malloc(12);
+	ft_bzero(permissions, 12);
 	permissions[1] = *((stats.st_mode & S_IRUSR) ? "r" : "-");
 	permissions[2] = *((stats.st_mode & S_IWUSR) ? "w" : "-");
 	permissions[3] = *((stats.st_mode & S_IXUSR) ? "x" : "-");
@@ -45,8 +61,8 @@ char				*convert_permissions(struct stat stats)
 
 void				general(t_fdata **list, struct stat stats)
 {
-	(*list)->timestamp = ctime(&stats.st_mtime);
-	(*list)->time = stats.st_mtime;
+	(*list)->timestamp = my_time(stats);
+	(*list)->time = stats.st_ctime;
 	(*list)->timestamp[24] = '\0';
 	(*list)->size = stats.st_size;
 	(*list)->block = stats.st_blocks;
@@ -68,6 +84,8 @@ t_fdata				*new_node(struct dirent *dir)
 		list->name = (dir)->d_name;
 		general(&list, stats);
 		ids(&list, stats);
+		if (ft_strcmp(dir->d_name, "..") == 0)
+			list->permissions[10] = *((dir->d_type == 4) ? "+" : 0);
 		list->permissions[0] = *((dir->d_type == 4) ? "d" : "-");
 		list->sub = NULL;
 		list->next = NULL;

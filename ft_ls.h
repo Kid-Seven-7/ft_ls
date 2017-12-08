@@ -13,7 +13,7 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
-# include "../libft/libft.h"
+# include "libft/libft.h"
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <time.h>
@@ -49,17 +49,20 @@ typedef struct		s_fdata
 }					t_fdata;
 
 void				detailed(t_fdata *list);
+void  			valid_parmas(char *params, int i);
 void				sort_by_name(t_fdata **cur);
 void				sort_by_time(t_fdata **cur);
 void				arg_check(int ac, char **av);
 void				default_print(t_fdata *list);
 void				print_hidden(t_fdata *list);
 void				print_dhidden(t_fdata *list);
-void				add_to_params(char *params, char param);
 void				sort_by_name_rev(t_fdata **list);
+void				process(t_fdata *list, t_dir *data);
 void				sort_lst(t_fdata *list, t_dir *data);
 void				print_lst(t_fdata *list, t_dir *data);
+void				add_to_params(char *params, char param);
 void				swap_fileds(t_fdata **small, t_fdata **big, t_fdata **prev);
+char				*my_time(struct stat stats);
 t_fdata				*sub(char *str);
 t_fdata				*read_into_dir(t_dir *data);
 t_fdata				*new_node(struct dirent *dir);

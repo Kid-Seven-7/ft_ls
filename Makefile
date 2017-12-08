@@ -4,6 +4,7 @@ CC 				= clang
 CFLAGS 		= #-Wall -Werror -Wextra
 SRC 			= main.c\
 						arg_check.c\
+						arg_check1.c\
 						readdir.c\
 						new_node.c\
 						ft_lstadd_to_head.c\
@@ -11,6 +12,7 @@ SRC 			= main.c\
 						sort_lst.c\
 						swap_fields.c\
 						printing.c\
+						more_printing.c\
 						libft/libft.a
 OBJ =
 

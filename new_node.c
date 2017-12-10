@@ -70,13 +70,13 @@ void				general(t_fdata **list, struct stat stats)
 	(*list)->permissions = convert_permissions(stats);
 }
 
-t_fdata				*new_node(struct dirent *dir)
+t_fdata				*new_node(struct dirent *dir, char *file)
 {
 	t_fdata			*list;
 	struct stat		stats;
 
 	list = NULL;
-	if (stat(dir->d_name, &stats) == 0)
+	if (stat(file, &stats) == 0)
 	{
 		if (!(list = (t_fdata *)malloc(sizeof(t_fdata))))
 			return (NULL);
@@ -90,5 +90,7 @@ t_fdata				*new_node(struct dirent *dir)
 		list->sub = NULL;
 		list->next = NULL;
 	}
+	else
+		perror(dir->d_name);
 	return (list);
 }

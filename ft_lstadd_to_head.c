@@ -12,27 +12,23 @@
 
 #include "ft_ls.h"
 
-t_fdata	*ft_lstadd_to_head(struct dirent *dir, t_fdata *list)
+t_fdata	*ft_lstadd_to_head(struct dirent *dir, t_fdata *list, char *file)
 {
 	t_fdata	*temp;
 
 	temp = list;
 	while (temp->next)
-	{
 		temp = temp->next;
-	}
 	if (temp)
-	{
-		temp->next = new_node(dir);
-	}
+		temp->next = new_node(dir, file);
 	return (temp);
 }
 
-t_fdata	*ft_lstsub_to_head(struct dirent *dir, t_fdata *list)
+t_fdata	*ft_lstsub_to_head(struct dirent *dir, t_fdata *list, char *file)
 {
 	t_fdata	*temp;
 
-	temp = new_node(dir);
+	temp = new_node(dir, file);
 	if (temp)
 		temp->sub->next = list;
 	return (temp);

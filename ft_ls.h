@@ -65,8 +65,8 @@ void				swap_fileds(t_fdata **small, t_fdata **big, t_fdata **prev);
 char				*my_time(struct stat stats);
 t_fdata				*sub(char *str);
 t_fdata				*read_into_dir(t_dir *data);
-t_fdata				*new_node(struct dirent *dir);
-t_fdata				*ft_lstsub_to_head(struct dirent *dir, t_fdata *list);
-t_fdata				*ft_lstadd_to_head(struct dirent *dir, t_fdata *list);
+t_fdata				*new_node(struct dirent *dir, char *file);
+t_fdata				*ft_lstsub_to_head(struct dirent *dir, t_fdata *list, char *file);
+t_fdata				*ft_lstadd_to_head(struct dirent *dir, t_fdata *list, char *file);
 
 #endif

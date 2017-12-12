@@ -40,6 +40,7 @@ typedef struct		s_fdata
 	long					time;
 	char					*uid;
 	char					*gid;
+	unsigned int	g_id;
 	long int				size;
 	long int				block;
 	unsigned long int		links;

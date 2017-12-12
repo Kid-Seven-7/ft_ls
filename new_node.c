@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 15:32:55 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/12 14:18:13 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/12 16:57:23 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ void				ids(t_fdata **list, struct stat stats)
 	struct group	*grp;
 
 	user = getpwuid(stats.st_uid);
-	(*list)->uid = (char *)malloc(ft_strlen((char *)user->pw_name));
-	(*list)->uid = user->pw_name;
+	(*list)->uid = ft_strdup(user->pw_name);
 	grp = getgrgid(stats.st_gid);
-	(*list)->gid = (char *)malloc(ft_strlen((char *)grp->gr_name));
-	(*list)->gid = grp->gr_name;
+	(*list)->g_id = stats.st_gid;
+	(*list)->gid = ft_strdup(grp->gr_name);
 }
 
 char				*convert_permissions(struct stat stats)

@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 16:13:59 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/06 16:15:07 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/12 16:47:51 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void		print_dhidden(t_fdata *list)
 		ft_putstr(" ");
 		ft_putstr(list->name);
 		ft_putstr("\n");
-		// if (list->sub)
-		// 	printf("list->sub->name is |%s|\n", list->sub->name);
 		list = list->next;
 	}
 	ft_putstr("\n");

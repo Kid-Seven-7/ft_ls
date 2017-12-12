@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 15:32:55 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/05 10:18:19 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/12 14:18:13 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char				*my_time(struct stat stats)
 {
 	char	*my_time;
-	int 	i;
+	int		i;
 	char	*temp;
 
 	i = -1;
@@ -76,6 +76,7 @@ t_fdata				*new_node(struct dirent *dir, char *file)
 	struct stat		stats;
 
 	list = NULL;
+	// printf("file is %s\n", file);
 	if (stat(file, &stats) == 0)
 	{
 		if (!(list = (t_fdata *)malloc(sizeof(t_fdata))))

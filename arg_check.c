@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 09:44:47 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/07 23:40:32 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/12 14:14:22 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		init_data(t_dir **data)
 	ft_bzero((*data)->params, 5);
 }
 
-int		file_check(int ac, char **av, int i, t_dir **data)
+int			file_check(int ac, char **av, int i, t_dir **data)
 {
 	char	*joined;
 	t_dir	*temp;
@@ -35,16 +35,14 @@ int		file_check(int ac, char **av, int i, t_dir **data)
 		d = opendir(joined);
 		if (d)
 		{
-		temp->name = joined;
-		temp = next;
-		closedir(d);
+			temp->name = joined;
+			temp = next;
+			closedir(d);
 		}
 		else
 		{
-			ft_putstr("ls: ");
-			ft_putstr(av[i]);
-			ft_putstr(": No such file or directory\n");
-			return (1);
+			if ((print_error(av[i])) == 1)
+				return (1);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 10:19:53 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/06 16:13:50 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/12 15:34:35 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	process(t_fdata *list, t_dir *data)
 {
-	int 	l;
-	int 	a;
-	int 	i;
+	int		l;
+	int		a;
+	int		i;
 
 	l = 0;
 	a = 0;
@@ -32,7 +32,7 @@ void	process(t_fdata *list, t_dir *data)
 		detailed(list);
 	else if (a == 1 && l == 0)
 		print_hidden(list);
- 	else if(a == 1 && l == 1)
+	else if (a == 1 && l == 1)
 		print_dhidden(list);
 }
 

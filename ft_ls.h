@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 15:30:34 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/06 16:01:10 by jngoma           ###   ########.fr       */
+/*   Updated: 2017/12/12 14:00:29 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct		s_fdata
 }					t_fdata;
 
 void				detailed(t_fdata *list);
-void  			valid_parmas(char *params, int i);
+void  				valid_parmas(char *params, int i);
 void				sort_by_name(t_fdata **cur);
 void				sort_by_time(t_fdata **cur);
 void				arg_check(int ac, char **av);
@@ -63,6 +63,7 @@ void				print_lst(t_fdata *list, t_dir *data);
 void				add_to_params(char *params, char param);
 void				swap_fileds(t_fdata **small, t_fdata **big, t_fdata **prev);
 char				*my_time(struct stat stats);
+int				print_error(char *file);
 t_fdata				*sub(char *str);
 t_fdata				*read_into_dir(t_dir *data);
 t_fdata				*new_node(struct dirent *dir, char *file);

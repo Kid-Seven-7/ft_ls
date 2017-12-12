@@ -57,6 +57,8 @@ void		print_dhidden(t_fdata *list)
 		ft_putstr(" ");
 		ft_putstr(list->name);
 		ft_putstr("\n");
+		// if (list->sub)
+		// 	printf("list->sub->name is |%s|\n", list->sub->name);
 		list = list->next;
 	}
 	ft_putstr("\n");

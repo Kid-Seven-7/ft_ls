@@ -82,7 +82,6 @@ void				recursion(char *target)
 	char			*one;
 
 	head = NULL;
-	ft_putendl(target);
 	if (!(dp = opendir(target)))
 		return ;
 	name = ft_strjoin(target, "/");

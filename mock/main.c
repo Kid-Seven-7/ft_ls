@@ -74,7 +74,7 @@ char		*options(char *str, char *s2)
 
 void			print_files(t_files *head)
 {
-	t_files		*trav; 
+	t_files		*trav;
 
 	trav = head;
 	while (trav)
@@ -110,7 +110,7 @@ void		ft_ls_target(t_files *head, char *options)
 	while (trav)
 	{
 		if ((dp = opendir(trav->file)))
-			diretory = alloc_files(directory, dp->d_name);
+			directory = alloc_files(directory, dp->d_name);
 		else
 			ft_ls(trav->file, options);
 	}
@@ -150,8 +150,3 @@ int			main(int argc, char **argv)
 	else
 		ft_ls_files(head, options);
 }
-
-
-
-
-

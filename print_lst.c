@@ -53,11 +53,6 @@ void	print_lst(t_fdata *list, t_dir *data)
 		}
 		if (data->params[i] == 'R')
 		{
-			if (ft_strcmp(data->name, ".") != 0)
-			{
-				ft_putstr(data->name);
-				ft_putendl(":");
-			}
 			recursion(data->name);
 			flag++;
 		}

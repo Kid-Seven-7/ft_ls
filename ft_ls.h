@@ -65,6 +65,8 @@ void				add_to_params(char *params, char param);
 void				swap_fileds(t_fdata **small, t_fdata **big, t_fdata **prev);
 char				*my_time(struct stat stats);
 int				print_error(char *file);
+void				recursion(char *target);
+
 t_fdata				*sub(char *str);
 t_fdata				*read_into_dir(t_dir *data);
 t_fdata				*new_node(struct dirent *dir, char *file);

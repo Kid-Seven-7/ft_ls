@@ -1,0 +1,55 @@
+The synopsis of my ft_ls
+
+int main (int ac, char **av)
+The main simply passes the ac and av to arg_check
+  - arg_check(ac, av)
+
+arg_check (int ac, char **av)
+arg_check declares the data and list structures
+
+init_data is called to initialize the data structure
+  - init_data(&data)
+    void init_data(t_dir **data)
+    init_data merely allocates space for the data structure and its members
+
+if ac is greater than 1 param_check is called
+  - param_check(ac, av, &data)
+    void param_check (int ac, char **av, t_dir **data)
+    param_check iterates through the av in search of ls options
+
+    if a av string starts with '-' and is longer than one character add_to_params is called
+    - add_to_params((*data)->params, av[i][j])
+      void add_to_params(char *params, char param)
+      iterates though params if param exists it is skipped else it is added to the string
+
+    else file_check is called
+    - file_check(ac, av, i, data)
+      file_check(int ac, char **av, int i, t_dir **data)
+      iterates through the ls options that do not start with '-' and attemps to open them
+      should the fail to open then they are not valid directories and print_error is called and
+      '1' is returned
+
+    if k == 1 (symbolic of an error) the program exists
+    - exit(1)
+
+    valid_parmas is called at the end of param_check to verify that valid options were passed
+    - valid_parmas((*data)->params, -1)
+      void valid_parmas(char *params, int i)
+      recursively iterates through the params string in search of valid ls options
+
+the list structure is populated by a call to read_into_dir
+  - read_into_dir(data)
+    read_into_dir(t_dir *data)
+    opens the directory data->name adding its information to the list structure
+
+if ac is greater than 1 sort_lst is called
+  - sort_lst (list, data)
+    sort_lst(t_fdata *list, t_dir *data)
+    sorts the list (by default is no sorting options are present) then calls print_lst
+      -print_lst(list, data)
+        print_lst(t_fdata *list, t_dir *data)
+        prints out the list (by default if no printing options are present)
+
+else sort_by_name and default_print are called
+  - sort_by_name (&list)
+  - default_print (list)

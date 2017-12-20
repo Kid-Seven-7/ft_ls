@@ -13,6 +13,7 @@ SRC 			= main.c\
 						swap_fields.c\
 						printing.c\
 						more_printing.c\
+						recursion.c\
 						libft/libft.a
 OBJ =
 

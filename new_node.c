@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 15:32:55 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/12 16:57:23 by jngoma           ###   ########.fr       */
+/*   Updated: 2018/08/17 12:56:35 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_fdata				*new_node(struct dirent *dir, char *file)
 	struct stat		stats;
 
 	list = NULL;
-	// printf("file is %s\n", file);
 	if (stat(file, &stats) == 0)
 	{
 		if (!(list = (t_fdata *)malloc(sizeof(t_fdata))))

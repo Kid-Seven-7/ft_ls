@@ -6,13 +6,13 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:14:26 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/12 14:16:12 by jngoma           ###   ########.fr       */
+/*   Updated: 2018/08/19 16:33:28 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	valid_parmas(char *params, int i)
+void		valid_parmas(char *params, int i)
 {
 	while (params[++i])
 	{
@@ -26,17 +26,33 @@ void	valid_parmas(char *params, int i)
 			valid_parmas(params, i);
 		else if (params[i] == 't')
 			valid_parmas(params, i);
+		else if (params[i] == 'h')
+			valid_parmas(params, i);
+		else if (params[i] == 'S')
+			valid_parmas(params, i);
 		else
 		{
 			ft_putstr("ls: illegal option -- ");
 			ft_putchar(params[i]);
-			ft_putstr("\nusage: ls [-Ralrt] [file ...]\n");
+			ft_putstr("\nusage: ls [-RSahlrt] [file ...]\n");
 			exit(1);
 		}
 	}
 }
 
-int		print_error(char *file)
+int			file_check_one(char **av, int i)
+{
+	char	*joined;
+	DIR		*d;
+
+	joined = ft_strjoin("./", av[i]);
+	d = opendir(joined);
+	if (!d)
+		return (1);
+	return (0);
+}
+
+int			print_error(char *file)
 {
 	ft_putstr("ls: ");
 	ft_putstr(file);

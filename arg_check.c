@@ -6,7 +6,7 @@
 /*   By: jngoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 09:44:47 by jngoma            #+#    #+#             */
-/*   Updated: 2017/12/12 14:14:22 by jngoma           ###   ########.fr       */
+/*   Updated: 2018/08/19 16:33:41 by jngoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ void		arg_check(int ac, char **av)
 	}
 	else
 		data->name = ".";
-	list = read_into_dir(data);
+	if (file_check_one(av, ac - 1))
+		list = read_into_dir(data);
+	else
+		list = read_into_dir_tar(av[ac - 1]);
 	if (ac > 1)
 		sort_lst(list, data);
 	else

@@ -52,6 +52,26 @@ void	sort_by_time(t_fdata **list)
 	}
 }
 
+void	sort_by_size(t_fdata **list)
+{
+	t_fdata *cur;
+	t_fdata *prev;
+
+	cur = (*list);
+	prev = NULL;
+	while (cur)
+	{
+		if (cur->next)
+			if ((cur->size) < (cur->next->size))
+			{
+				swap_fileds(&cur, &cur->next, &prev);
+				cur = (*list);
+			}
+		prev = cur;
+		cur = cur->next;
+	}
+}
+
 void	sort_by_name_rev(t_fdata **list)
 {
 	t_fdata *cur;

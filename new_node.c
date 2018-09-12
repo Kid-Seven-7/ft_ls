@@ -46,6 +46,7 @@ char				*convert_permissions(struct stat stats)
 
 	permissions = (char *)malloc(12);
 	ft_bzero(permissions, 12);
+	permissions[0] = *((stats.st_mode & S_IFDIR) ? "d" : "-");
 	permissions[1] = *((stats.st_mode & S_IRUSR) ? "r" : "-");
 	permissions[2] = *((stats.st_mode & S_IWUSR) ? "w" : "-");
 	permissions[3] = *((stats.st_mode & S_IXUSR) ? "x" : "-");
@@ -55,6 +56,8 @@ char				*convert_permissions(struct stat stats)
 	permissions[7] = *((stats.st_mode & S_IROTH) ? "r" : "-");
 	permissions[8] = *((stats.st_mode & S_IWOTH) ? "w" : "-");
 	permissions[9] = *((stats.st_mode & S_IXOTH) ? "x" : "-");
+	if ((stats.st_mode & S_IFMT) == S_IFLNK)
+		permissions[0] = 'l';
 	return (permissions);
 }
 
@@ -75,7 +78,7 @@ t_fdata				*new_node(struct dirent *dir, char *file)
 	struct stat		stats;
 
 	list = NULL;
-	if (stat(file, &stats) == 0)
+	if (lstat(file, &stats) == 0)
 	{
 		if (!(list = (t_fdata *)malloc(sizeof(t_fdata))))
 			return (NULL);
@@ -85,7 +88,8 @@ t_fdata				*new_node(struct dirent *dir, char *file)
 		ids(&list, stats);
 		if (ft_strcmp(dir->d_name, "..") == 0)
 			list->permissions[10] = *((dir->d_type == 4) ? "+" : 0);
-		list->permissions[0] = *((dir->d_type == 4) ? "d" : "-");
+		if (list->permissions[0] != 'l')
+			list->permissions[0] = *((dir->d_type == 4) ? "d" : "-");
 		list->sub = NULL;
 		list->next = NULL;
 	}

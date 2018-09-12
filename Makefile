@@ -12,6 +12,7 @@ SRC 			= main.c\
 						sort_lst.c\
 						swap_fields.c\
 						printing.c\
+						printing2.c\
 						recursion.c\
 						libft/libft.a
 OBJ =

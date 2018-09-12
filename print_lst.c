@@ -36,7 +36,7 @@ void	process(t_fdata *list, t_dir *data)
 	else if (a == 1 && l == 0)
 		print_hidden(list);
 	else if (a == 1 && l == 1)
-		print_dhidden(list);
+		print_dkhidden(list);
 }
 
 void	print_lst(t_fdata *list, t_dir *data)
